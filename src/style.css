@@ -1,0 +1,247 @@
+body {
+  margin: 0;
+}
+
+#cesiumContainer {
+  background: gray;
+  height: 100vh;
+  width: 100%;
+  z-index: 0;
+}
+
+#measure {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 100;
+  padding: 10px 20px;
+  background-color: #0077ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#measure:hover {
+  background-color: #005fc1;
+}
+
+#assetLoaderContainer {
+  position: absolute;
+  top: 60px;
+  left: 20px;
+  z-index: 100;
+  display: flex;
+  gap: 5px;
+}
+
+#assetIdInput {
+  padding: 8px;
+  font-size: 14px;
+  width: 160px;
+}
+
+#loadAssetBtn {
+  padding: 8px 12px;
+  font-size: 14px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#loadAssetBtn:hover {
+  background-color: #218838;
+}
+
+#startStopContainer {
+  position: absolute;
+  top: 110px;
+  left: 20px;
+  z-index: 100;
+  display: flex;
+  gap: 5px;
+}
+
+#startMeasureBtn, #stopMeasureBtn {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#startMeasureBtn {
+  background-color: #007bff;
+  color: white;
+}
+
+#startMeasureBtn:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+#stopMeasureBtn {
+  background-color: #ffc107;
+  color: black;
+  display: none;
+}
+
+
+#startStopHeightContainer {
+  position: absolute;
+  top: 110px;
+  left: 20px;
+  z-index: 100;
+  display: flex;
+  gap: 5px;
+}
+
+#startHeightBtn, #stopHeightBtn {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#startHeightBtn {
+  background-color: #007bff;
+  color: white;
+}
+
+#startHeightBtn:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+#stopHeightBtn {
+  background-color: #ffc107;
+  color: black;
+  display: none; /* Start hidden */
+}
+
+#profileStartBtn, #profileStopBtn {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#profileStartBtn {
+  background-color: #007bff;
+  color: white;
+}
+
+#profileStartBtn:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+#profileStopBtn {
+  background-color: #ffc107;
+  color: black;
+  display: none; /* Start hidden */
+}
+
+#polygonStartBtn, #polygonStopBtn {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#polygonStartBtn {
+  background-color: #007bff;
+  color: white;
+}
+
+#polygonStartBtn:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+#polygonStopBtn {
+  background-color: #ffc107;
+  color: black;
+  display: none; /* Start hidden */
+}
+
+#clippingStartBtn, #clippingStopBtn {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#clippingStartBtn {
+  background-color: #007bff;
+  color: white;
+}
+
+#clippingStartBtn:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+#clippingStopBtn {
+  background-color: #ffc107;
+  color: black;
+  display: none; /* Start hidden */
+}
+
+#losStartBtn, #losStopBtn {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#losStartBtn {
+  background-color: #007bff;
+  color: white;
+}
+
+#losStartBtn:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+#losStopBtn {
+  background-color: #ffc107;
+  color: black;
+  display: none; /* Start hidden */
+}
+
+
+#optionSelect {
+  padding: 6px;
+  font-size: 14px;
+}
+
+#chartContainer {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 60%;       /* increased from 400px */
+  height: 40%;      /* increased from 250px */
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  padding: 12px;
+  display: none;
+  border-bottom: 50px;
+}
+
+#terrainChart {
+  width: 100%;
+  height: 100%;
+}

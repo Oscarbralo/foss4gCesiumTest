@@ -1,1 +1,1 @@
-# foss4gCesiumTest
+Personal CesiumJS viewer
