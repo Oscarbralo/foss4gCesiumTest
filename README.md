@@ -1,1 +1,137 @@
-Personal CesiumJS viewer
+download the project 
+
+https://github.com/Oscarbralo/foss4gCesiumTest
+
+
+install webpack  
+	npm i -D webpack webpack-cli webpack-dev-server ts-loader typescript html-webpack-plugin copy-webpack-plugin css-loader style-loader
+
+
+build 
+	npm run build
+
+run the project
+	npm run start
+
+
+This will not work without your own token ID, so lets enter cesium Ion and lets see the token
+
+
+add your ion token in order to view the globe
+
+
+then uncomment everything
+
+
+Then lets create a input text and a button to call an id from ion and load it here
+
+
+
+//ASSET ID CODE
+//CREATE THE CONTAINER FOR THE ASSET TEXT INPUT AND BUTTON
+const assetContainer = document.createElement("div");
+assetContainer.id = "assetLoaderContainer";
+document.body.appendChild(assetContainer);
+
+//CREATES THE ASSET INPUT TEXT
+const assetInput = document.createElement("input");
+assetInput.type = "text";
+assetInput.id = "assetIdInput";
+assetInput.placeholder = "Enter your ID here";
+assetContainer.append(assetInput);
+
+//CREATES THE ASSET LOAD BUTTON
+const loadBtn = document.createElement("button");
+loadBtn.id = "loadAssetBtn";
+loadBtn.innerText = "Load Asset";
+assetContainer.append(loadBtn);
+
+//2602291  for japan buildings
+
+//LOAD THE ASSET ID WHEN CLICK
+loadBtn.addEventListener("click", async  () => {
+
+  const assetId = parseInt(assetInput.value, 10);
+
+  const tileset = await Cesium3DTileset.fromIonAssetId(assetId);
+  viewer.scene.primitives.add(tileset);
+  viewer.flyTo(tileset);
+
+})
+
+
+
+
+Lets fill the add label module
+
+
+
+import {
+    Cartesian2,
+    Math,
+    VerticalOrigin,
+    LabelStyle,
+    Color,
+    defined,
+    ScreenSpaceEventType,
+    ScreenSpaceEventHandler,
+    sampleTerrainMostDetailed,
+    Cartographic
+} from "cesium";
+
+export function addlabel(viewer) {
+
+    const handler = new ScreenSpaceEventHandler(viewer.scene.canvas);
+
+    handler.setInputAction(async function (movement) {
+
+        let cartesian = viewer.scene.pickPosition(movement.position);
+
+        viewer.entities.add({
+                position: cartesian,
+                point: { pixelSize: 10, color: Color.RED },
+                label: {
+                    text: `You clicked here`,
+                    font: "20px sans-serif",
+                    fillColor: Color.YELLOW,
+                    style: LabelStyle.FILL_AND_OUTLINE,
+                    outlineWidth: 2,
+                    verticalOrigin: VerticalOrigin.BOTTOM,
+                    disableDepthTestDistance: Number.POSITIVE_INFINITY,
+                    pixelOffset: new Cartesian2(0, -12),
+                },
+            });
+
+
+    }, ScreenSpaceEventType.LEFT_CLICK);
+    return handler
+
+}
+
+
+
+We can add next some color to the picked feature
+
+
+const picked = viewer.scene.pick(movement.position);
+
+picked.color = Color.RED;
+
+
+Load the House.laz into Cesium Ion
+
+We will have to adust the tileset location
+
+Load the example of the house through the app
+
+You will see small points, so we will do them bigger in order to watch them properly
+
+
+tileset.pointCloudShading.attenuation = true;
+
+Ten point inside the point cloud in order to see your point
+
+
+
+
+Load the gasussian splat
