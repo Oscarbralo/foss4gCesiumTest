@@ -6,15 +6,17 @@ INSTRUCTIONS
 
 
 [] Install webpack  
+
 	npm i -D webpack webpack-cli webpack-dev-server ts-loader typescript html-webpack-plugin copy-webpack-plugin css-loader style-loader
 
 
 [] Build 
+
 	npm run build
 
 [] Run the project
-	npm run start
 
+	npm run start
 
     This will not work without your own token ID, so lets enter cesium Ion and lets see the token
 
@@ -26,8 +28,6 @@ INSTRUCTIONS
 
 
 [] Lets create a input text and a button to call an id from ion and load it here
-
-
 
     //ASSET ID CODE
     //CREATE THE CONTAINER FOR THE ASSET TEXT INPUT AND BUTTON
@@ -64,8 +64,6 @@ INSTRUCTIONS
 
 
 [] Lets fill the add label module
-
-
 
     import {
         Cartesian2,
@@ -112,7 +110,6 @@ INSTRUCTIONS
 
 
 [] Next we will add next some color to the picked feature
-
 
     const picked = viewer.scene.pick(movement.position);
 
