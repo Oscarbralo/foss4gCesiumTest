@@ -6,6 +6,7 @@ import {
   defined,
   CesiumTerrainProvider,
   IonResource,
+  Cesium3DTileStyle,
   Cesium3DTileset
 } from "cesium";
 import "cesium/Widgets/widgets.css";

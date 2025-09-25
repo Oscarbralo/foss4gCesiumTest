@@ -127,7 +127,9 @@ Load the example of the house through the app
 You will see small points, so we will do them bigger in order to watch them properly
 
 
-tileset.pointCloudShading.attenuation = true;
+tileset.style = new Cesium3DTileStyle({
+      pointSize: 3 
+  });
 
 Ten point inside the point cloud in order to see your point
 

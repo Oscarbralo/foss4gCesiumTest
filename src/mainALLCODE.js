@@ -6,6 +6,7 @@ import {
   defined,
   CesiumTerrainProvider,
   IonResource,
+  Cesium3DTileStyle,
   Cesium3DTileset
 } from "cesium";
 import "cesium/Widgets/widgets.css";
@@ -94,7 +95,9 @@ loadBtn.addEventListener("click", async  () => {
 
   const tileset = await Cesium3DTileset.fromIonAssetId(assetId);
   tileset.pointCloudShading.attenuation = true;
-  viewer.scene.primitives.add(tileset);
+  tileset.style = new Cesium3DTileStyle({
+      pointSize: 3 
+  });
   viewer.flyTo(tileset);
 
 })
