@@ -14,8 +14,10 @@ import "./style.css";
 
 import { addlabel } from "./modules/addlabel";
 
+window.CESIUM_BASE_URL = "/cesium";
+
 //REQUIRED
-Ion.defaultAccessToken = ""; // Required!
+Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJjZmIyYTkxYS1jMTBlLTQ5NTEtYTAyMy1hYjdhYTdmYTAzODIiLCJpZCI6MTgzNjI0LCJpYXQiOjE3MDIyNjA2NTh9.3KXg4ibfVsiazg8lfKznsQ8zh8IBhVXpu6Oz0mRCbX4"; // Required!
 
 console.log(Ion.defaultAccessToken);
 
@@ -23,7 +25,7 @@ const viewer = new Viewer("cesiumContainer", {
   terrain: Terrain.fromWorldTerrain(),
 });
 
-viewer.terrainProvider = await CesiumTerrainProvider.fromIonAssetId(2767062);
+viewer.terrainProvider = await CesiumTerrainProvider.fromIonAssetId(1);
 viewer.scene.pickTranslucentDepth = true;
 
 
@@ -86,6 +88,17 @@ loadBtn.id = "loadAssetBtn";
 loadBtn.innerText = "Load Asset";
 assetContainer.append(loadBtn);
 
+const slider = document.createElement("input");
+slider.type = "range";
+slider.min = 1;
+slider.max = 10;
+slider.step = 1;
+slider.value = 1;
+assetContainer.append(slider);
+
+
+
+
 //2602291  for japan buildings
 
 //LOAD THE ASSET ID WHEN CLICK
@@ -94,10 +107,8 @@ loadBtn.addEventListener("click", async  () => {
   const assetId = parseInt(assetInput.value, 10);
 
   const tileset = await Cesium3DTileset.fromIonAssetId(assetId);
-  tileset.pointCloudShading.attenuation = true;
-  tileset.style = new Cesium3DTileStyle({
-      pointSize: 3 
-  });
+  viewer.scene.primitives.add(tileset);
+  slider.addEventListener("input", () => tileset.style = new Cesium3DTileStyle({pointSize: slider.value}));
   viewer.flyTo(tileset);
 
 })

@@ -127,13 +127,28 @@ Load the example of the house through the app
 You will see small points, so we will do them bigger in order to watch them properly
 
 
-tileset.style = new Cesium3DTileStyle({
-      pointSize: 3 
-  });
-
-Ten point inside the point cloud in order to see your point
 
 
+Pin point inside the point cloud in order to see your point
+
+
+Add a slider
+
+const slider = document.createElement("input");
+slider.type = "range";
+slider.min = 1;
+slider.max = 10;
+slider.step = 1;
+slider.value = 1;
+assetContainer.append(slider);
+
+
+and the listener
+
+ slider.addEventListener("input", () => tileset.style = new Cesium3DTileStyle({pointSize: slider.value}));
+
+
+make the tests that click the small points is not very easy, but when you make them bigger, its easier
 
 
 Load the gasussian splat
