@@ -114,7 +114,7 @@ INSTRUCTIONS
 [] Pin point inside the point cloud in order to see your point
 
 
-[] Then lets add a slider
+[] Then lets add a slider in order to make the points inside the point cloud bigger
 
     const slider = document.createElement("input");
     slider.type = "range";
