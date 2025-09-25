@@ -93,6 +93,7 @@ loadBtn.addEventListener("click", async  () => {
   const assetId = parseInt(assetInput.value, 10);
 
   const tileset = await Cesium3DTileset.fromIonAssetId(assetId);
+  tileset.pointCloudShading.attenuation = true;
   viewer.scene.primitives.add(tileset);
   viewer.flyTo(tileset);
 

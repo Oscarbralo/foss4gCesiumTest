@@ -30,6 +30,10 @@ export function addlabel(viewer) {
                 },
             });
 
+        const picked = viewer.scene.pick(movement.position);
+
+        picked.color = Color.RED;
+
 
     }, ScreenSpaceEventType.LEFT_CLICK);
     return handler
