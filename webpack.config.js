@@ -34,9 +34,23 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       },
       {
+        test: /\.(png|gif|jpg|jpeg|svg|xml|json)$/,
+        use: ['url-loader']
+      },
+      // ✅ Cesium専用（import.metaをサポート）
+      {
         test: /\.js$/,
-        include: /node_modules\/cesium/,
-        type: "javascript/auto",
+        include: path.resolve(__dirname, 'node_modules/cesium'),
+        type: 'javascript/auto',
+      },
+      // ✅ 自分のコード用
+      {
+        test: /\.m?js$/,
+        exclude: /node_modules/,
+        type: 'javascript/auto',
+        resolve: {
+          fullySpecified: false
+        }
       }
     ],
     unknownContextCritical: false
@@ -68,5 +82,5 @@ module.exports = {
     watchFiles: ['src/**/*', 'index.html']
   },
   mode: "development",
-  
+
 };
