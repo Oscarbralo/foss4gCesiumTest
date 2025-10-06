@@ -4,7 +4,8 @@ import {
     LabelStyle,
     Color,
     ScreenSpaceEventType,
-    ScreenSpaceEventHandler
+    ScreenSpaceEventHandler,
+    defined
 } from "cesium";
 
 export function addlabel(viewer) {
@@ -32,7 +33,9 @@ export function addlabel(viewer) {
 
         const picked = viewer.scene.pick(movement.position);
 
-        picked.color = Color.RED;
+        if (defined(picked)) {
+            picked.color = Color.RED;
+        }
 
 
     }, ScreenSpaceEventType.LEFT_CLICK);

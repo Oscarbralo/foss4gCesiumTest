@@ -16,7 +16,7 @@ import { addlabel } from "./modules/addlabel";
 
 window.CESIUM_BASE_URL = "/cesium";
 
-
+//REQUIRED
 Ion.defaultAccessToken = ""; // Required!
 
 console.log(Ion.defaultAccessToken);
@@ -24,11 +24,12 @@ console.log(Ion.defaultAccessToken);
 //const viewer = new Viewer("cesiumContainer", {
 //  terrain: Terrain.fromWorldTerrain(),
 //});
+
 //viewer.terrainProvider = await CesiumTerrainProvider.fromIonAssetId(2767062);
 //viewer.scene.pickTranslucentDepth = true;
 
 
-//// COntainer, buttons and listeners for hlabel
+//// Container, buttons and listeners for hlabel
 //
 //const modulesContainer = document.createElement("div");
 //modulesContainer.id = "modulesContainer";

@@ -89,7 +89,7 @@ INSTRUCTIONS
 
 
     }, ScreenSpaceEventType.LEFT_CLICK);
-    return handler
+    return handler;
 
 
 
@@ -97,7 +97,10 @@ INSTRUCTIONS
 
     const picked = viewer.scene.pick(movement.position);
 
-    picked.color = Color.RED;
+    if (defined(picked)) {
+        picked.color = Color.RED;
+    }
+
 
 
 [] Load example items in cesium Ion

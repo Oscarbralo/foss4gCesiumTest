@@ -17,7 +17,7 @@ import { addlabel } from "./modules/addlabel";
 window.CESIUM_BASE_URL = "/cesium";
 
 //REQUIRED
-Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJjZmIyYTkxYS1jMTBlLTQ5NTEtYTAyMy1hYjdhYTdmYTAzODIiLCJpZCI6MTgzNjI0LCJpYXQiOjE3MDIyNjA2NTh9.3KXg4ibfVsiazg8lfKznsQ8zh8IBhVXpu6Oz0mRCbX4"; // Required!
+Ion.defaultAccessToken = ""; // Required!
 
 console.log(Ion.defaultAccessToken);
 
@@ -25,7 +25,7 @@ const viewer = new Viewer("cesiumContainer", {
   terrain: Terrain.fromWorldTerrain(),
 });
 
-viewer.terrainProvider = await CesiumTerrainProvider.fromIonAssetId(1);
+viewer.terrainProvider = await CesiumTerrainProvider.fromIonAssetId(2767062);
 viewer.scene.pickTranslucentDepth = true;
 
 
