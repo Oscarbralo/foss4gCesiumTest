@@ -1,11 +1,12 @@
 INSTRUCTIONS
 
-[] Download the project 
+[] Clone the project 
 
-    https://github.com/Oscarbralo/foss4gCesiumTest
+    git clone https://github.com/Oscarbralo/foss4gCesiumTest
 
+    ****   If you didnt install git, go to this link (https://git-scm.com/downloads)
 
-[] Install webpack  
+[] Install webpack 
 
 	npm i -D webpack webpack-cli webpack-dev-server ts-loader typescript html-webpack-plugin copy-webpack-plugin css-loader style-loader
 
@@ -18,16 +19,16 @@ INSTRUCTIONS
 
 	npm run start
 
-    This will not work without your own token ID, so lets enter cesium Ion and lets see the token
+    ***This will not work without your own token ID, so lets enter cesium Ion and lets see the token
 
 
-[] Add your ion token in order to view the globe
+[] Add your ion token in order to view the globe. Go to Cesium Ion - Auth  and grab your token.
 
 
-[] Then uncomment everything
+[] Then uncomment everything else.
 
 
-[] Lets create a input text and a button to call an id from ion and load it here
+[] Lets create an input text and a button to call an id from ion and load it here
 
     //ASSET ID CODE
     //CREATE THE CONTAINER FOR THE ASSET TEXT INPUT AND BUTTON
@@ -63,7 +64,7 @@ INSTRUCTIONS
 
 
 
-[] Lets fill the add label module
+[] Lets fill the add label module for when you click you see a point and a label
 
 
     const handler = new ScreenSpaceEventHandler(viewer.scene.canvas);
@@ -107,7 +108,7 @@ INSTRUCTIONS
 
     Load the House.laz into Cesium Ion
 
-    We will have to adust the tileset location
+    IMPORTANT ****  We will have to adust the tileset location
 
 [] Load the example of the house through the app
 
