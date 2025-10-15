@@ -157,7 +157,7 @@ Cesium IonにHouse.lazをアップロードし、アセットの位置を設定�
     slider.addEventListener("input", () => tileset.style = new Cesium3DTileStyle({pointSize: slider.value}));
 ```
 
-点群の点のサイズが小さいままだとクリックして選択することが困難ですが、点のサイズを大きくすることで選択が用意になります。
+点群の点のサイズが小さいままだとクリックして選択することが困難ですが、点のサイズを大きくすることで選択が容易になります。
 
 ### [13] ガウシアンスプラフティングデータをロード
 
