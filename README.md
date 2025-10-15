@@ -1,34 +1,64 @@
 INSTRUCTIONS
 
-[] Download the project 
+### [1] プロジェクトのダウンロード
 
-    https://github.com/Oscarbralo/foss4gCesiumTest
+[https://github.com/Oscarbralo/foss4gCesiumTest](https://github.com/Oscarbralo/foss4gCesiumTest)
+
+以下のコマンドでリポジトリをクローンするか、ZIPでダウンロードしてください。
+
+```bash
+git clone https://github.com/Oscarbralo/foss4gCesiumTest.git
+```
+
+### [2] webpackのインストール  
+
+以下のコマンドでWebpackの必要なパッケージをインストールします。
+
+```bash
+npm i -D webpack webpack-cli webpack-dev-server ts-loader typescript html-webpack-plugin copy-webpack-plugin css-loader style-loader
+```
+
+### [3] プロジェクトの実行
+
+src/main.jsの以下の部分に、Cesium Ionのアクセストークンを記入します。アクセストークンが設定されていないと正しく実行できないので、Cesium Ionのサイトへアクセスし、アクセストークンを取得してください。
+
+```javascript
+//REQUIRED
+Ion.defaultAccessToken = ""; // Required!
+```
+
+さらに、以下の部分をアンコメントします。
+
+```javascript
+const viewer = new Viewer("cesiumContainer", {
+  terrain: Terrain.fromWorldTerrain(),
+});
+```
+
+ここまでの準備ができたら、以下のコマンドを実行するとブラウザが起動し、Cesiumの画面が表示されます。
+
+```bash
+npm run start
+```
+
+### [4] ビルド 
+
+以下のコマンドでビルドを実行します。
+
+```bash
+npm run build
+```
+
+ビルドを実行すると、distというディレクトリが作成され、本番環境用のファイル一式が作成されます。
+
+### [5] src/main.jsのすべてのコードをアンコメント
 
 
-[] Install webpack  
+### [6] テキストボックスとボタンを作成
 
-	npm i -D webpack webpack-cli webpack-dev-server ts-loader typescript html-webpack-plugin copy-webpack-plugin css-loader style-loader
+Cesium IonアセットのアセットIDを入力するためのテキストボックスと、ロードするためのボタンを作成します。
 
-
-[] Build 
-
-	npm run build
-
-[] Run the project
-
-	npm run start
-
-    This will not work without your own token ID, so lets enter cesium Ion and lets see the token
-
-
-[] Add your ion token in order to view the globe
-
-
-[] Then uncomment everything
-
-
-[] Lets create a input text and a button to call an id from ion and load it here
-
+```javascript
     //ASSET ID CODE
     //CREATE THE CONTAINER FOR THE ASSET TEXT INPUT AND BUTTON
     const assetContainer = document.createElement("div");
@@ -60,12 +90,11 @@ INSTRUCTIONS
       viewer.flyTo(tileset);
 
     })
+```
 
+### [7] ラベル追加のモジュールを実装
 
-
-[] Lets fill the add label module
-
-
+```javascript
     const handler = new ScreenSpaceEventHandler(viewer.scene.canvas);
 
     handler.setInputAction(async function (movement) {
@@ -90,32 +119,29 @@ INSTRUCTIONS
 
     }, ScreenSpaceEventType.LEFT_CLICK);
     return handler
+```
 
 
+### [8] クリックした地点の点の色を設定
 
-[] Next we will add next some color to the picked feature
-
+```javascript
     const picked = viewer.scene.pick(movement.position);
 
     picked.color = Color.RED;
+```
 
 
-[] Load example items in cesium Ion
+### [9] 点群データをCesium Ionにアップデート
 
-    Load the House.laz into Cesium Ion
+Cesium IonにHouse.lazをアップロードし、アセットの位置を設定します。
 
-    We will have to adust the tileset location
+### [10] 点群のアセットをCesiumにロード
 
-[] Load the example of the house through the app
+点群データをロードすると、表示される点のサイズが小さすぎて見づらい状態になっています。そこで、点のサイズを調整して見やすく表示されるようにします。
 
-    You will see small points, so we will do them bigger in order to watch them properly
+### [11] 点群の点のサイズの大きさを設定するスライダを配置
 
-
-[] Pin point inside the point cloud in order to see your point
-
-
-[] Then lets add a slider in order to make the points inside the point cloud bigger
-
+```javascript
     const slider = document.createElement("input");
     slider.type = "range";
     slider.min = 1;
@@ -123,15 +149,17 @@ INSTRUCTIONS
     slider.step = 1;
     slider.value = 1;
     assetContainer.append(slider);
+```
 
+### [12] スライダに対するイベントハンドラを実装
 
-[] And the listener
-
+```javascript
     slider.addEventListener("input", () => tileset.style = new Cesium3DTileStyle({pointSize: slider.value}));
+```
 
+点群の点のサイズが小さいままだとクリックして選択することが困難ですが、点のサイズを大きくすることで選択が用意になります。
 
-[] Make the tests that click the small points is not very easy, but when you make them bigger, its easier
+### [13] ガウシアンスプラフティングデータをロード
 
-[] Load the gasussian splat (if time permits)
+上記の点群と同様にCesium Ionにアップロードし、座標を設定後Cesiumにロードしてみましょう。ロードしたガウシアンスプラフティングのデータは、点群データと同様にクリックして選択することができます。
 
-[] Click point inside the gaussian splat 
