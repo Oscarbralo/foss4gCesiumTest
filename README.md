@@ -33,7 +33,7 @@ npm i -D webpack webpack-cli webpack-dev-server ts-loader typescript html-webpac
 Ion.defaultAccessToken = "ココにアクセストークンを貼り付ける"; // Required!
 ```
 
-さらに、以下の部分をアンコメントします。
+さらに、以下の部分のコメントアウトを解除します。
 
 *[src/main.js](src/main.js)*
 ```javascript
@@ -43,7 +43,7 @@ const viewer = new Viewer("cesiumContainer", {
 ```
 
 > [!TIP]
-> Visual Studio Codeをお使いの場合は、範囲を選択してCtrl + / でコメント／ア> ンコメントを切り替えることができます。
+> Visual Studio Codeをお使いの場合は、範囲を選択してCtrl + / でコメントアウト／コメントアウト解除を切り替えることができます。
 
 ここまでの準備ができたら、以下のコマンドを実行するとブラウザが起動し、Cesiumの画面が表示されます。
 
@@ -185,5 +185,5 @@ slider.addEventListener("input", () => tileset.style = new Cesium3DTileStyle({po
 
 ### [13] ガウシアンスプラフティングデータをロード
 
-上記の点群と同様にCesium Ionにアップロードし、座標を設定後Cesiumにロードしてみましょう。ロードしたガウシアンスプラフティングのデータは、点群データと同様にクリックして選択することができます。
+上記の点群と同様に、リポジトリに同梱されているGaussian Splat Test File.zipを[Cesium Ion](https://cesium.com/platform/cesium-ion/)にアップロードし、座標を設定後Cesiumにロードしてみましょう。ロードしたガウシアンスプラフティングのデータは、点群データと同様にクリックして選択することができます。
 
