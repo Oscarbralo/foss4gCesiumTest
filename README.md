@@ -1,8 +1,14 @@
-INSTRUCTIONS
+
+# foss4gCesiumTest
+
+本リポジトリは2025年10月9日に行われた[「CesiumJSで始める3Dマップ開発 –– 基礎と活用例を学ぶ」](https://talks.osgeo.org/foss4g-2025-japan/talk/PR7QBP/)ハンズオンセッションで使用されたCesium.jsのサンプルコードです。
+以下に、ハンズオンセッションで実施した内容の概要を示します。
+
+### [0] 前提条件
+
+本リポジトリのプロジェクトは[Node.js](https://nodejs.org/ja/)を使用します。あらかじめNode.jsをインストールしてください。
 
 ### [1] プロジェクトのダウンロード
-
-[https://github.com/Oscarbralo/foss4gCesiumTest](https://github.com/Oscarbralo/foss4gCesiumTest)
 
 以下のコマンドでリポジトリをクローンするか、ZIPでダウンロードしてください。
 
@@ -20,20 +26,24 @@ npm i -D webpack webpack-cli webpack-dev-server ts-loader typescript html-webpac
 
 ### [3] プロジェクトの実行
 
-src/main.jsの以下の部分に、Cesium Ionのアクセストークンを記入します。アクセストークンが設定されていないと正しく実行できないので、Cesium Ionのサイトへアクセスし、アクセストークンを取得してください。
+[src/main.js](src/main.js)の以下の部分に、[Cesium Ion](https://cesium.com/platform/cesium-ion/)のアクセストークンを記入します。アクセストークンが設定されていないと正しく実行できないので、[Cesium Ion](https://cesium.com/platform/cesium-ion/)のサイトへアクセスし、アクセストークンを取得してください。
 
 ```javascript
 //REQUIRED
-Ion.defaultAccessToken = ""; // Required!
+Ion.defaultAccessToken = "ココにアクセストークンを貼り付ける"; // Required!
 ```
 
 さらに、以下の部分をアンコメントします。
 
+*[src/main.js](src/main.js)*
 ```javascript
 const viewer = new Viewer("cesiumContainer", {
   terrain: Terrain.fromWorldTerrain(),
 });
 ```
+
+> [!TIP]
+> Visual Studio Codeをお使いの場合は、範囲を選択してCtrl + / でコメント／ア> ンコメントを切り替えることができます。
 
 ここまでの準備ができたら、以下のコマンドを実行するとブラウザが起動し、Cesiumの画面が表示されます。
 
@@ -51,36 +61,42 @@ npm run build
 
 ビルドを実行すると、distというディレクトリが作成され、本番環境用のファイル一式が作成されます。
 
-### [5] src/main.jsのすべてのコードをアンコメント
+### [5] [src/main.js](src/main.js)のすべてのコードをアンコメント
 
+先頭の「//」を消去してください。
+
+> [!NOTE]
+> 先頭が「////」となっているところはコメント行なので、スラッシュを2つ残してください。
 
 ### [6] テキストボックスとボタンを作成
 
-Cesium IonアセットのアセットIDを入力するためのテキストボックスと、ロードするためのボタンを作成します。
+[Cesium Ion](https://cesium.com/platform/cesium-ion/)アセットのアセットIDを入力するためのテキストボックスと、アセットをロードするためのボタンを作成します。
 
+*[src/main.js](src/main.js)*
 ```javascript
-    //ASSET ID CODE
-    //CREATE THE CONTAINER FOR THE ASSET TEXT INPUT AND BUTTON
+    // テキストボックスとボタンのためのコンテナを作成
     const assetContainer = document.createElement("div");
     assetContainer.id = "assetLoaderContainer";
     document.body.appendChild(assetContainer);
 
-    //CREATES THE ASSET INPUT TEXT
+    // テキストボックスを作成
     const assetInput = document.createElement("input");
     assetInput.type = "text";
     assetInput.id = "assetIdInput";
     assetInput.placeholder = "Enter your ID here";
     assetContainer.append(assetInput);
 
-    //CREATES THE ASSET LOAD BUTTON
+    // アセットを読み込むボタンを作成
     const loadBtn = document.createElement("button");
     loadBtn.id = "loadAssetBtn";
     loadBtn.innerText = "Load Asset";
     assetContainer.append(loadBtn);
 
-    //2602291  for japan buildings
+    // Japan 3D Buildingsをロードする場合は、あらかじめ
+    // Cesium IonのAsset DepotでMy Assetsに追加しておいてください。
+    // Japan 3D BuildingsのアセットIDは2602291。
 
-    //LOAD THE ASSET ID WHEN CLICK
+    // ボタンをクリックしたときにアセットをロードするイベントハンドラ
     loadBtn.addEventListener("click", async  () => {
 
       const assetId = parseInt(assetInput.value, 10);
@@ -94,13 +110,18 @@ Cesium IonアセットのアセットIDを入力するためのテキストボ�
 
 ### [7] ラベル追加のモジュールを実装
 
+* [src/modules/addlabel.js](src/modules/addlabel.js)
 ```javascript
+    // シーン上をクリックしたときのイベントハンドラを作成
     const handler = new ScreenSpaceEventHandler(viewer.scene.canvas);
 
+    // クリック時のイベント内容を実装
     handler.setInputAction(async function (movement) {
 
+        // クリックされた地点の座標を取得
         let cartesian = viewer.scene.pickPosition(movement.position);
 
+        // シーンにクリックした地点のポイントとラベルを追加
         viewer.entities.add({
                 position: cartesian,
                 point: { pixelSize: 10, color: Color.RED },
@@ -115,25 +136,26 @@ Cesium IonアセットのアセットIDを入力するためのテキストボ�
                     pixelOffset: new Cartesian2(0, -12),
                 },
             });
-
-
     }, ScreenSpaceEventType.LEFT_CLICK);
     return handler
 ```
 
+> [!NOTE]
+> イベントハンドラとは、ユーザの入力やレンダリングの開始といったプログラムのイベントに対する動作を定義する関数です。
 
 ### [8] クリックした地点の点の色を設定
 
+* [src/modules/addlabel.js](src/modules/addlabel.js)
 ```javascript
+    // 
     const picked = viewer.scene.pick(movement.position);
 
     picked.color = Color.RED;
 ```
 
-
 ### [9] 点群データをCesium Ionにアップデート
 
-Cesium IonにHouse.lazをアップロードし、アセットの位置を設定します。
+[Cesium Ion](https://cesium.com/platform/cesium-ion/)に、リポジトリに同梱されているHouse.lazをアップロードし、アセットの座標を設定します。
 
 ### [10] 点群のアセットをCesiumにロード
 
@@ -141,6 +163,7 @@ Cesium IonにHouse.lazをアップロードし、アセットの位置を設定�
 
 ### [11] 点群の点のサイズの大きさを設定するスライダを配置
 
+*[src/main.js](src/main.js)*
 ```javascript
     const slider = document.createElement("input");
     slider.type = "range";
@@ -153,8 +176,9 @@ Cesium IonにHouse.lazをアップロードし、アセットの位置を設定�
 
 ### [12] スライダに対するイベントハンドラを実装
 
+*[src/main.js](src/main.js)*
 ```javascript
-    slider.addEventListener("input", () => tileset.style = new Cesium3DTileStyle({pointSize: slider.value}));
+slider.addEventListener("input", () => tileset.style = new Cesium3DTileStyle({pointSize: slider.value}));
 ```
 
 点群の点のサイズが小さいままだとクリックして選択することが困難ですが、点のサイズを大きくすることで選択が容易になります。
