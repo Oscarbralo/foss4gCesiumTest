@@ -4,7 +4,8 @@ import {
     LabelStyle,
     Color,
     ScreenSpaceEventType,
-    ScreenSpaceEventHandler
+    ScreenSpaceEventHandler,
+    defined
 } from "cesium";
 
 export function addlabel(viewer) {
